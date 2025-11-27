@@ -1,0 +1,5 @@
+{
+  "name": "NeonLinguist AI",
+  "description": "A comprehensive text analysis tool providing grammar correction, linguistic insights, readability scores, and fact-checking using Gemini 2.5.",
+  "requestFramePermissions": []
+}
