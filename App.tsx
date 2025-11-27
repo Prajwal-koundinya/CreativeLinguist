@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef } from 'react';
 import { analyzeText } from './services/geminiService';
 import { AnalysisResult, FileData } from './types';
 import AnalysisDashboard from './components/AnalysisDashboard';
@@ -9,7 +9,6 @@ const App: React.FC = () => {
   const [file, setFile] = useState<FileData | null>(null);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<AnalysisResult | null>(null);
-  const [useSearch, setUseSearch] = useState(false);
   
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -42,7 +41,8 @@ const App: React.FC = () => {
     setResult(null);
 
     try {
-      const data = await analyzeText(inputText, file ? { mimeType: file.mimeType, data: file.data } : undefined, useSearch);
+      // Always enable search grounding as per requirements, letting the model decide when to use it via tools
+      const data = await analyzeText(inputText, file ? { mimeType: file.mimeType, data: file.data } : undefined, true);
       setResult(data);
     } catch (error) {
       console.error(error);
@@ -72,7 +72,7 @@ const App: React.FC = () => {
             </h1>
           </div>
           <div className="text-xs font-mono text-gray-500 hidden sm:block">
-            Powered by Gemini 2.5 Flash
+            Natural Language Processing
           </div>
         </div>
       </header>
@@ -122,20 +122,7 @@ const App: React.FC = () => {
                   )}
                 </div>
 
-                <div className="flex items-center gap-3">
-                   <label className="flex items-center gap-2 cursor-pointer group">
-                    <div className="relative">
-                      <input 
-                        type="checkbox" 
-                        checked={useSearch} 
-                        onChange={(e) => setUseSearch(e.target.checked)} 
-                        className="sr-only peer"
-                      />
-                      <div className="w-9 h-5 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-neon-blue rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-neon-blue"></div>
-                    </div>
-                    <span className="text-xs text-gray-400 group-hover:text-gray-200 transition-colors">Google Search Grounding</span>
-                  </label>
-                </div>
+                {/* Search Toggle Removed */}
               </div>
 
               {/* Text Area */}
