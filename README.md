@@ -164,13 +164,6 @@ python app.py
 
 </div>
 
-```mermaid
-graph LR
-    A[📥 Input Text] --> B[⚙️ Run Analysis]
-    B --> C[📊 Review Results]
-    C --> D[✍️ Apply Suggestions]
-```
-
 ### Detailed Workflow
 
 1. **Input Your Content**
@@ -276,14 +269,6 @@ If you found this project helpful, please consider giving it a ⭐!
 - **TextBlob** for comprehensive NLP capabilities
 - **Flask** community for excellent documentation
 - All our **contributors** who help improve Linguistix
-
----
-
-<div align="center">
-  
-**Made with ❤️ by the Linguistix Team**
-
-</div>
 
 ---
 
